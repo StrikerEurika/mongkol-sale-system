@@ -6,35 +6,26 @@
         {{ $t("pages.customersPage.title") }}
       </h1>
 
-      <button
+      <v-btn
+        color="warning"
         @click="openAddCustomerModal"
-        class="flex items-center px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 focus:outline-none"
+        :class="$t('fontFamilyClass.body')"
       >
-        <svg
-          class="h-5 w-5 mr-2"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-          />
-        </svg>
+        <FontAwesomeIcon class="mr-1" :icon="['fas', 'plus']" />
         {{ $t("pages.customersPage.addCustomerButton") }}
-      </button>
+      </v-btn>
     </div>
 
     <!-- Switch view -->
     <div class="flex gap-4 mb-6">
-      <v-btn append-icon="$vuetify" :class="$t('fontFamilyClass.body')">{{
-        $t("pages.customersPage.listViewButton")
-      }}</v-btn>
-      <v-btn append-icon="$vuetify" :class="$t('fontFamilyClass.body')">{{
-        $t("pages.customersPage.mapViewButton")
-      }}</v-btn>
+      <v-btn color="warning" :class="$t('fontFamilyClass.body')">
+        <FontAwesomeIcon class="mr-1" :icon="['fas', 'list']" />
+        {{ $t("pages.customersPage.listViewButton") }}</v-btn
+      >
+      <v-btn color="warning" :class="$t('fontFamilyClass.body')">
+        <FontAwesomeIcon class="mr-1" :icon="['fas', 'map-marker']" />
+        {{ $t("pages.customersPage.mapViewButton") }}
+      </v-btn>
 
       <div class="flex-1"></div>
     </div>
