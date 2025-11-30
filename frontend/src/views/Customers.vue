@@ -30,7 +30,7 @@
       <div class="flex-1"></div>
     </div>
 
-    <BaseTable
+    <!-- <BaseTable
       :columns="[
         { label: '#', key: 'index' },
         { label: 'Name', key: 'name' },
@@ -53,7 +53,9 @@
           class: 'text-red-600 hover:text-red-900',
         },
       ]"
-    />
+    /> -->
+
+    <CustomerListAndMap :customers="customers" />
 
     <!-- Add/Edit Customer Modal -->
     <div
@@ -166,7 +168,8 @@
 import { ref, computed, onMounted } from "vue";
 import { useDataStore } from "@/stores/data";
 import type { Customer } from "@/types";
-import BaseTable from "@/components/BaseTable.vue";
+// import BaseTable from "@/components/BaseTable.vue";
+import CustomerListAndMap from "@/components/CustomerListAndMap.vue";
 
 const dataStore = useDataStore();
 
