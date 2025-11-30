@@ -1,62 +1,49 @@
 {
-    "components": {
-        "navbar": {
-            "navTitle": "Mongkol Sale System",
-            "logOutButton": "Log Out"
-        },
-        "sidebar": {
-            "welcomeMessage": "Welcome to Mongkol sale system!",
-            "sidebarNavigation": {
-                "home": "Home",
-                "dashboard": "Dashboard",
-                "items": "Items",
-                "orders": "Orders",
-                "customers": "Customers",
-                "settings": "Settings",
-                "contacts": "Contacts",
-                "profile": "Profile"
-            }
-        }
-    },
-    "pages": {
-        "homePage": {
-            "title": "Home Page",
-            "welcomeMessage": "Welcome back, ",
-            "dashboard": {
-                "title": "Dashboard",
-                "welcomeMessage": "Welcome to your dashboard!"
-            },
-            "quickAccess": "Quick Access"
-        },
-        "itemsPage": {
-            "title": "Items",
-            "addItemButton": "Add New Item",
-            "filterByProduct": "Filter by Product",
-            "filterBySize": "Filter by Size",
-            "table": {
-                "header": {
-                    "itemName": "Item Name",
-                    "product": "Product",
-                    "size": "Size",
-                    "price": "Price",
-                    "stock": "Stock",
-                    "status": "Status"
-                }
-            },
-            "addItemModal": {
-                "title": "Add New Item",
-                "name": "Item Name",
-                "size": "Size",
-                "stock": "Stock",
-                "price": "Price",
-                "saveButton": "Save",
-                "cancelButton": "Cancel"
-            }
-        },
-        "authPage": {
-            "title": "Sign in to Mongkol Sale System",
-            "welcome": "Welcome to Mongkol sale system!",
-            "signInButton": "Sign In"
-        }
-    }
+    "fontFamilyClass.header": "playfair-header",
+    "fontFamilyClass.body": "rubik-body",
+
+    "components.navbar.navTitle": "Mongkol Sale System",
+    "components.navbar.logOutButton": "Log Out",
+    "components.sidebar.welcomeMessage": "Welcome to Mongkol sale system!",
+    "components.sidebar.sidebarNavigation.home": "Home",
+    "components.sidebar.sidebarNavigation.dashboard": "Dashboard",
+    "components.sidebar.sidebarNavigation.items": "Items",
+    "components.sidebar.sidebarNavigation.orders": "Orders",
+    "components.sidebar.sidebarNavigation.customers": "Customers",
+    "components.sidebar.sidebarNavigation.settings": "Settings",
+    "components.sidebar.sidebarNavigation.contacts": "Contacts",
+    "components.sidebar.sidebarNavigation.profile": "Profile",
+
+    "pages.homePage.title": "Home Page",
+    "pages.homePage.welcomeMessage": "Welcome back, ",
+    "pages.homePage.dashboard.title": "Dashboard",
+    "pages.homePage.dashboard.welcomeMessage": "Welcome to your dashboard!",
+    "pages.homePage.quickAccess": "Quick Access",
+
+    "pages.itemsPage.title": "Items",
+    "pages.itemsPage.addItemButton": "Add New Item",
+    "pages.itemsPage.filterByProduct": "Filter by Product",
+    "pages.itemsPage.filterBySize": "Filter by Size",
+    "pages.itemsPage.table.header.itemName": "Item Name",
+    "pages.itemsPage.table.header.product": "Product",
+    "pages.itemsPage.table.header.size": "Size",
+    "pages.itemsPage.table.header.price": "Price",
+    "pages.itemsPage.table.header.stock": "Stock",
+    "pages.itemsPage.table.header.status": "Status",
+    "pages.itemsPage.addItemModal.title": "Add New Item",
+    "pages.itemsPage.addItemModal.name": "Item Name",
+    "pages.itemsPage.addItemModal.size": "Size",
+    "pages.itemsPage.addItemModal.stock": "Stock",
+    "pages.itemsPage.addItemModal.price": "Price",
+    "pages.itemsPage.addItemModal.saveButton": "Save",
+    "pages.itemsPage.addItemModal.cancelButton": "Cancel",
+
+    "pages.authPage.title": "Sign in to Mongkol Sale System",
+    "pages.authPage.welcome": "Welcome to Mongkol sale system!",
+    "pages.authPage.signInButton": "Sign In",
+
+    "pages.customersPage.title": "Customers",
+    "pages.customersPage.addCustomerButton": "Add New Customer",
+    "pages.customersPage.mapViewButton": "Customer Map",
+    "pages.customersPage.listViewButton": "Customer List"
 }

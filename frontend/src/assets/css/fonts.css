@@ -1,120 +1,50 @@
 @import url("https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Bokor&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bokor&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Siemreap&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Siemreap&display=swap");
 
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 
-/* Kantumruy Pro */
-
-.kantumruy-pro-regular {
-  font-family: "Kantumruy Pro", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
-}
-
-.kantumruy-pro-bold {
-  font-family: "Kantumruy Pro", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.kantumruy-pro-italic {
-  font-family: "Kantumruy Pro", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.kantumruy-pro-bold-italic {
-  font-family: "Kantumruy Pro", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: italic;
-}
-
-/* Bokor */
-.bokor-regular {
-  font-family: "Bokor", serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.bokor-bold {
-  font-family: "Bokor", serif;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.bokor-italic {
-  font-family: "Bokor", serif;
-  font-weight: 400;
-  font-style: italic;
-}
-.bokor-bold-italic {
-  font-family: "Bokor", serif;
-  font-weight: 700;
-  font-style: italic;
-}
-
-/* Siemreap */
-.siemreap-regular {
-  font-family: "Siemreap", serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-/* Libre Baskerville */
-.libre-baskerville-regular {
-  font-family: "Libre Baskerville", serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.libre-baskerville-bold {
-  font-family: "Libre Baskerville", serif;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.libre-baskerville-italic {
-  font-family: "Libre Baskerville", serif;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.libre-baskerville-bold-italic {
-  font-family: "Libre Baskerville", serif;
-  font-weight: 700;
-  font-style: italic;
-}
-
-/* Rubik */
 .rubik-regular {
   font-family: "Rubik", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
+.playfair-header {
+  font-family: "Playfair Display", serif;
 
-.rubik-bold {
-  font-family: "Rubik", sans-serif;
-  font-weight: 700;
+  font-weight: 400;
+  font-style: normal;
+}
+.kantumruy-body {
+  font-family: "Kantumruy Pro", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.siemreap-header {
+  font-family: "Siemreap", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Playfair Display */
+.playfair-display-regular {
+  font-family: "Playfair Display", serif;
+  font-weight: 400;
   font-style: normal;
 }
 
 /* ===== ENGLISH ===== */
 .lang-en {
-  --font-body: "Rubik", serif;
   --font-heading: "Playfair Display", sans-serif;
+  --font-body: "Rubik", sans-serif;
 }
 
 /* ===== KHMER ===== */
 .lang-kh {
-  --font-body: "Kantumruy Pro", sans-serif;
   --font-heading: "Siemreap", sans-serif;
+  --font-body: "Kantumruy Pro", sans-serif;
 }
 
 /* Apply globally */
@@ -132,3 +62,4 @@ h5,
 h6 {
   font-family: var(--font-heading);
 }
+

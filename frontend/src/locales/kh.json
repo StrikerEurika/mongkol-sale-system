@@ -1,64 +1,45 @@
 {
-    
-    "components": {
-        "navbar": {
-            "navTitle": "ប្រព័ន្ធលក់ មង្គល",
-            "logOutButton": "ចាកចេញ"
-        },
-        "sidebar": {
-            "welcomeMessage": "សូមស្វាគមន៍មកកាន់ប្រព័ន្ធលក់ មង្គល!",
-            "sidebarNavigation": {
-                "home": "ទំព័រដើម",
-                "dashboard": "ផ្ទាំងគ្រប់គ្រង",
-                "items": "ទំនិញ",
-                "orders": "ការកម្ម៉ង់ទិញ",
-                "customers": "អតិថិជន",
-                "settings": "ការកំណត់",
-                "contacts": "ទំនាក់ទំនង",
-                "profile": "ប្រវត្តិរូប"
-            }
-        }
-    },
-    "pages": {
-        "homePage": {
-            "title": "ទំព័រដើម",
-            "welcomeMessage": "សូមស្វាគមន៍ត្រឡប់មកវិញ, ",
-            "dashboard": {
-                "title": "ផ្ទាំងគ្រប់គ្រង",
-                "welcomeMessage": "សូមស្វាគមន៍មកកាន់ផ្ទាំងគ្រប់គ្រងរបស់អ្នក!"
-            },
-            "quickAccess": "ចូលប្រើរហ័ស"
-        },
-        
-        "itemsPage": {
-            "title": "ទំនិញ",
-            "addItemButton": "បន្ថែមទំនិញថ្មី",
-            "filterByProduct": "តម្រៀបតាមផលិតផល",
-            "filterBySize": "តម្រៀបតាមទំហំ",
-            "table": {
-                "header": {
-                    "itemName": "ឈ្មោះទំនិញ",
-                    "product": "ផលិតផល",
-                    "size": "ទំហំ",
-                    "price": "តម្លៃ",
-                    "stock": "ស្តុក",
-                    "status": "ស្ថានភាព"
-                }
-            },
-            "addItemModal": {
-                "title": "បន្ថែមទំនិញថ្មី",
-                "name": "ឈ្មោះទំនិញ",
-                "size": "ទំហំ",
-                "stock": "ស្តុក",
-                "price": "តម្លៃ",
-                "saveButton": "រក្សាទុក",
-                "cancelButton": "បោះបង់"
-            }
-        },
-        "authPage": {
-            "title": "ចូលទៅកាន់ប្រព័ន្ធលក់ មង្គល",
-            "welcome": "សូមស្វាគមន៍មកកាន់ប្រព័ន្ធលក់ មង្គល!",
-            "signInButton": "ចូល"
-        }
-    }
+    "fontFamilyClass.header": "siemreap-header",
+    "fontFamilyClass.body": "kantumruy-body",
+    "components.navbar.navTitle": "ប្រព័ន្ធលក់ មង្គល",
+    "components.navbar.logOutButton": "ចាកចេញ",
+    "components.sidebar.welcomeMessage": "សូមស្វាគមន៍មកកាន់ប្រព័ន្ធលក់ មង្គល!",
+    "components.sidebar.sidebarNavigation.home": "ទំព័រដើម",
+    "components.sidebar.sidebarNavigation.dashboard": "ផ្ទាំងគ្រប់គ្រង",
+    "components.sidebar.sidebarNavigation.items": "ទំនិញ",
+    "components.sidebar.sidebarNavigation.orders": "ការកម្ម៉ង់ទិញ",
+    "components.sidebar.sidebarNavigation.customers": "អតិថិជន",
+    "components.sidebar.sidebarNavigation.settings": "ការកំណត់",
+    "components.sidebar.sidebarNavigation.contacts": "ទំនាក់ទំនង",
+    "components.sidebar.sidebarNavigation.profile": "ប្រវត្តិរូប",
+    "pages.homePage.title": "ទំព័រដើម",
+    "pages.homePage.welcomeMessage": "សូមស្វាគមន៍ត្រឡប់មកវិញ, ",
+    "pages.homePage.dashboard.title": "ផ្ទាំងគ្រប់គ្រង",
+    "pages.homePage.dashboard.welcomeMessage": "សូមស្វាគមន៍មកកាន់ផ្ទាំងគ្រប់គ្រងរបស់អ្នក!",
+    "pages.homePage.quickAccess": "ចូលប្រើរហ័ស",
+    "pages.itemsPage.title": "ទំនិញ",
+    "pages.itemsPage.addItemButton": "បន្ថែមទំនិញថ្មី",
+    "pages.itemsPage.filterByProduct": "តម្រៀបតាមផលិតផល",
+    "pages.itemsPage.filterBySize": "តម្រៀបតាមទំហំ",
+    "pages.itemsPage.table.header.itemName": "ឈ្មោះទំនិញ",
+    "pages.itemsPage.table.header.product": "ផលិតផល",
+    "pages.itemsPage.table.header.size": "ទំហំ",
+    "pages.itemsPage.table.header.price": "តម្លៃ",
+    "pages.itemsPage.table.header.stock": "ស្តុក",
+    "pages.itemsPage.table.header.status": "ស្ថានភាព",
+    "pages.itemsPage.addItemModal.title": "បន្ថែមទំនិញថ្មី",
+    "pages.itemsPage.addItemModal.name": "ឈ្មោះទំនិញ",
+    "pages.itemsPage.addItemModal.size": "ទំហំ",
+    "pages.itemsPage.addItemModal.stock": "ស្តុក",
+    "pages.itemsPage.addItemModal.price": "តម្លៃ",
+    "pages.itemsPage.addItemModal.saveButton": "រក្សាទុក",
+    "pages.itemsPage.addItemModal.cancelButton": "បោះបង់",
+    "pages.authPage.title": "ចូលទៅកាន់ប្រព័ន្ធលក់ មង្គល",
+    "pages.authPage.welcome": "សូមស្វាគមន៍មកកាន់ប្រព័ន្ធលក់ មង្គល!",
+    "pages.authPage.signInButton": "ចូល",
+    "pages.customersPage.title": "អតិថិជន",
+    "pages.customersPage.addCustomerButton": "បន្ថែមអតិថិជនថ្មី",
+    "pages.customersPage.mapViewButton": "ផែនទីអតិថិជន",
+    "pages.customersPage.listViewButton": "បញ្ជីអតិថិជន"
+
 }

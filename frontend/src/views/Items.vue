@@ -20,8 +20,8 @@
           @click="toggleProductMenu"
           class="flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-50 text-gray-800 shadow"
         >
-          <span class="text-sm font-medium">  
-            {{$t("pages.itemsPage.filterByProduct")}}
+          <span class="text-sm font-medium">
+            {{ $t("pages.itemsPage.filterByProduct") }}
           </span>
           <svg
             class="w-4 h-4"
@@ -104,55 +104,30 @@
     <div
       class="bg-white rounded-3xl shadow-lg overflow-hidden border border-gray-100"
     >
-      <table class="min-w-full">
-        <thead class="bg-transparent">
-          <tr class="text-left text-sm text-gray-600">
-            <th class="px-8 py-6">
-              {{ $t("pages.itemsPage.table.header.product") }}
-            </th>
-            <th class="px-8 py-6">
-              {{ $t("pages.itemsPage.table.header.size") }}
-            </th>
-            <th class="px-8 py-6">
-              {{ $t("pages.itemsPage.table.header.stock") }}
-            </th>
-            <th class="px-8 py-6">
-              {{ $t("pages.itemsPage.table.header.price") }}
-            </th>
-            <th class="px-8 py-6">
-              {{ $t("pages.itemsPage.table.header.status") }}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="item in filteredItems"
-            :key="item.id"
-            class="border-t border-gray-200 hover:bg-gray-50"
-          >
-            <td
-              class="px-8 py-4 font-semibold text-gray-800 kantumruy-pro-regular"
-            >
-              {{ item.name }}
-            </td>
-            <td class="px-8 py-4 text-gray-700">{{ item.size }}</td>
-            <td class="px-8 py-4 text-gray-700">{{ item.stock }} boxes</td>
-            <td class="px-8 py-4 text-gray-700">{{ item.price }}</td>
-            <td class="px-8 py-4">
-              <span
-                :class="{
-                  'text-green-600': item.stock > 50,
-                  'text-amber-500': item.stock > 0 && item.stock <= 50,
-                  'text-red-600': item.stock === 0,
-                }"
-                class="font-medium"
-              >
-                {{ statusText(item.stock) }}
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <BaseTable
+        :columns="[
+          { label: '#', key: 'index' },
+          { label: 'Name', key: 'name' },
+          { label: 'Size', key: 'size' },
+          { label: 'Stock', key: 'stock' },
+          { label: 'Price', key: 'price' },
+        ]"
+        :rows="
+          filteredItems.map((item, index) => ({ ...item, index: index + 1 }))
+        "
+        :actions="[
+          {
+            label: 'Edit',
+            handler: (row) => console.log('Edit', row),
+            class: 'text-indigo-600 hover:text-indigo-900',
+          },
+          {
+            label: 'Delete',
+            handler: (row) => console.log('Delete', row),
+            class: 'text-red-600 hover:text-red-900',
+          },
+        ]"
+      />
     </div>
 
     <!-- Simple Add Modal (kept minimal) -->
@@ -212,6 +187,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
 import { useDataStore } from "@/stores/data";
+import BaseTable from "@/components/BaseTable.vue";
 
 const dataStore = useDataStore();
 
@@ -279,6 +255,8 @@ const selectSize = (s: string) => {
 };
 
 const filteredItems = computed(() => {
+  if (!items.value || items.value.length === 0) return [];
+
   return items.value.filter((i) => {
     const byProduct =
       selectedProduct.value === "All" || i.name === selectedProduct.value;
@@ -305,7 +283,7 @@ const addMockItem = () => {
   const id = Math.max(0, ...items.value.map((i) => i.id)) + 1;
   items.value.push({
     id,
-    name: newItem.value.name || "ឈុតថ្មី",
+    name: newItem.value.name || "New Item",
     size: newItem.value.size,
     stock: newItem.value.stock,
     price: newItem.value.price || "$0",
@@ -314,3 +292,7 @@ const addMockItem = () => {
   closeModal();
 };
 </script>
+
+<style scoped>
+/* Add any component-specific styles here */
+</style>

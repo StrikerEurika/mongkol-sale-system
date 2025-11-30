@@ -25,105 +25,35 @@
     </div>
 
     <div class="bg-white rounded-lg shadow overflow-hidden">
-      <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50">
-          <tr>
-            <th
-              scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              #
-            </th>
-            <th
-              scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Customer
-            </th>
-            <th
-              scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Items
-            </th>
-            <th
-              scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Total
-            </th>
-            <th
-              scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Status
-            </th>
-            <th
-              scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Date
-            </th>
-            <th
-              scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Actions
-            </th>
-          </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-          <tr v-for="(order, index) in orders" :key="order.id">
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-              {{ index + 1 }}
-            </td>
-            <td
-              class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
-            >
-              {{ order.customer_name }}
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-              {{ order.items_count }} items
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-              ${{ order.total }}
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span
-                :class="[
-                  'px-2 inline-flex text-xs leading-5 font-semibold rounded-full',
-                  getStatusClass(order.status),
-                ]"
-              >
-                {{ order.status }}
-              </span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-              {{ formatDate(order.created_at) }}
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-              <button
-                @click="viewOrder(order)"
-                class="text-indigo-600 hover:text-indigo-900 mr-3"
-              >
-                View
-              </button>
-              <button
-                @click="updateOrderStatus(order)"
-                class="text-green-600 hover:text-green-900 mr-3"
-              >
-                Update
-              </button>
-              <button
-                @click="deleteOrder(order.id)"
-                class="text-red-600 hover:text-red-900"
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <BaseTable
+        :columns="[
+          { label: '#', key: 'index' },
+          { label: 'Customer', key: 'customerName' },
+          { label: 'Status', key: 'status' },
+          { label: 'Total', key: 'total' },
+          { label: 'Date', key: 'date' },
+        ]"
+        :rows="
+          orders.map((order, index) => ({
+            ...order,
+            index: index + 1,
+            customerName: getCustomerName(order.customer_id),
+            date: formatDate(order.date),
+          }))
+        "
+        :actions="[
+          {
+            label: 'View',
+            handler: viewOrder,
+            class: 'text-indigo-600 hover:text-indigo-900',
+          },
+          {
+            label: 'Delete',
+            handler: (row) => deleteOrder(row.id),
+            class: 'text-red-600 hover:text-red-900',
+          },
+        ]"
+      />
     </div>
 
     <!-- View Order Modal -->
@@ -493,6 +423,7 @@
 import { ref, computed, onMounted } from "vue";
 import { useDataStore } from "@/stores/data";
 import type { Order, Customer, Item } from "@/types";
+import BaseTable from "@/components/BaseTable.vue";
 
 const dataStore = useDataStore();
 
@@ -514,13 +445,23 @@ const form = ref({
 const selectedItem = ref(0);
 const itemQuantity = ref(1);
 
-const orders = computed(() => dataStore.allOrders);
-const customers = computed(() => dataStore.allCustomers);
-const items = computed(() => dataStore.allItems);
+const orders = computed(() => {
+  if (!dataStore.allOrders || dataStore.allOrders.length === 0) {
+    return [];
+  }
+
+  return dataStore.allOrders.map((order, index) => ({
+    ...order,
+    index: index + 1,
+    customerName: getCustomerName(order.customer_id),
+    date: formatDate(order.created_at),
+  }));
+});
+
+const customers = computed(() => dataStore.allCustomers || []);
+const items = computed(() => dataStore.allItems || []);
 
 onMounted(async () => {
-  // In a real app, you would fetch this data from your API
-  // Prefer data already present in the store (populated from staticData in DEV).
   if (!dataStore.allCustomers || dataStore.allCustomers.length === 0) {
     const mockCustomers: Customer[] = [
       {
@@ -703,6 +644,11 @@ const calculateTotal = computed(() => {
   });
   return total.toFixed(2);
 });
+
+const getCustomerName = (customerId) => {
+  const customer = customers.value.find((c) => c.id === customerId);
+  return customer ? customer.name : "Unknown Customer";
+};
 
 const viewOrder = (order: Order) => {
   selectedOrder.value = order;

@@ -1,8 +1,11 @@
 <!-- src/views/Customers.vue -->
 <template>
   <div class="p-6">
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold text-gray-800">Customers</h1>
+    <div class="flex justify-between items-center mb-6 rubik-regular">
+      <h1 class="text-2xl font-bold text-gray-800">
+        {{ $t("pages.customersPage.title") }}
+      </h1>
+
       <button
         @click="openAddCustomerModal"
         class="flex items-center px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 focus:outline-none"
@@ -20,89 +23,46 @@
             d="M12 6v6m0 0v6m0-6h6m-6 0H6"
           />
         </svg>
-        Add Customer
+        {{ $t("pages.customersPage.addCustomerButton") }}
       </button>
     </div>
 
-    <div class="bg-white rounded-lg shadow overflow-hidden">
-      <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50">
-          <tr>
-            <th
-              scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              #
-            </th>
-            <th
-              scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Name
-            </th>
-            <th
-              scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Email
-            </th>
-            <th
-              scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Phone
-            </th>
-            <th
-              scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Address
-            </th>
-            <th
-              scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Actions
-            </th>
-          </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-          <tr v-for="(customer, index) in customers" :key="customer.id">
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-              {{ index + 1 }}
-            </td>
-            <td
-              class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
-            >
-              {{ customer.name }}
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-              {{ customer.email }}
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-              {{ customer.phone }}
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-              {{ customer.address }}
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-              <button
-                @click="editCustomer(customer)"
-                class="text-indigo-600 hover:text-indigo-900 mr-3"
-              >
-                Edit
-              </button>
-              <button
-                @click="deleteCustomer(customer.id)"
-                class="text-red-600 hover:text-red-900"
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Switch view -->
+    <div class="flex gap-4 mb-6">
+      <v-btn append-icon="$vuetify" :class="$t('fontFamilyClass.body')">{{
+        $t("pages.customersPage.listViewButton")
+      }}</v-btn>
+      <v-btn append-icon="$vuetify" :class="$t('fontFamilyClass.body')">{{
+        $t("pages.customersPage.mapViewButton")
+      }}</v-btn>
+
+      <div class="flex-1"></div>
     </div>
+
+    <BaseTable
+      :columns="[
+        { label: '#', key: 'index' },
+        { label: 'Name', key: 'name' },
+        { label: 'Email', key: 'email' },
+        { label: 'Phone', key: 'phone' },
+        { label: 'Address', key: 'address' },
+      ]"
+      :rows="
+        customers.map((customer, index) => ({ ...customer, index: index + 1 }))
+      "
+      :actions="[
+        {
+          label: 'Edit',
+          handler: editCustomer,
+          class: 'text-indigo-600 hover:text-indigo-900',
+        },
+        {
+          label: 'Delete',
+          handler: (row) => deleteCustomer(row.id),
+          class: 'text-red-600 hover:text-red-900',
+        },
+      ]"
+    />
 
     <!-- Add/Edit Customer Modal -->
     <div
@@ -215,6 +175,7 @@
 import { ref, computed, onMounted } from "vue";
 import { useDataStore } from "@/stores/data";
 import type { Customer } from "@/types";
+import BaseTable from "@/components/BaseTable.vue";
 
 const dataStore = useDataStore();
 
@@ -341,7 +302,7 @@ const saveCustomer = async () => {
 async function deleteCustomer(id: number) {
   if (confirm("Are you sure you want to delete this customer?")) {
     try {
-      // In a real app, you would call your API here
+      // In a real app, call your API here
       // For this example, we'll remove from the mock data
       dataStore.customers = dataStore.customers.filter(
         (customer) => customer.id !== id
