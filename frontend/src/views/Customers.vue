@@ -1,39 +1,18 @@
-<!-- src/views/Customers.vue -->
 <template>
   <div class="p-6">
     <div class="flex justify-between items-center mb-6 rubik-regular">
       <h1 class="text-2xl font-bold text-gray-800">
         {{ $t("pages.customersPage.title") }}
       </h1>
-
-      <!-- <v-btn
-        color="warning"
-        @click="openAddCustomerModal"
-        :class="$t('fontFamilyClass.body')"
-      >
-        <FontAwesomeIcon class="mr-1" :icon="['fas', 'plus']" />
-        {{ $t("pages.customersPage.addCustomerButton") }}
-      </v-btn> -->
     </div>
 
-    <!-- Switch view -->
-    <!-- <div class="flex gap-4 mb-6"> -->
-      <!-- <v-btn color="warning" :class="$t('fontFamilyClass.body')">
-        <FontAwesomeIcon class="mr-1" :icon="['fas', 'list']" />
-        {{ $t("pages.customersPage.listViewButton") }}</v-btn
-      >
-      <v-btn color="warning" :class="$t('fontFamilyClass.body')">
-        <FontAwesomeIcon class="mr-1" :icon="['fas', 'map-marker']" />
-        {{ $t("pages.customersPage.mapViewButton") }}
-      </v-btn> -->
-
-      <!-- <div class="flex-1"></div>
-    </div> -->
-
-    <CustomerListAndMap :customers="customers" />
+    <CustomerListAndMap
+      :customers="customers"
+      @openCustomerModal="handleOpenCustomerModal"
+    />
 
     <!-- Add/Edit Customer Modal -->
-    <div
+    <!-- <div
       v-if="showModal"
       class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
     >
@@ -135,7 +114,12 @@
           </div>
         </form>
       </div>
-    </div>
+    </div> -->
+    <CustomerModal
+      v-model="isCustomerModalOpen"
+      :item="selectedCustomer"
+      @save="handleSaveCustomer"
+    />
   </div>
 </template>
 
@@ -143,11 +127,24 @@
 import { ref, computed, onMounted } from "vue";
 import { useDataStore } from "@/stores/data";
 import type { Customer } from "@/types";
-// import BaseTable from "@/components/BaseTable.vue";
+
 import CustomerListAndMap from "@/components/CustomerListAndMap.vue";
+import CustomerModal from "@/components/AddCustomerModal.vue";
 
 const dataStore = useDataStore();
 
+const isCustomerModalOpen = ref(false);
+const selectedCustomer = ref<Customer | null>(null);
+
+const handleOpenCustomerModal = (customer: Customer | null) => {
+  selectedCustomer.value = customer; // Set the customer data (null for new customer)
+  isCustomerModalOpen.value = true; // Open the modal
+};
+
+const handleSaveCustomer = (customer: Customer) => {
+  console.log("Customer saved:", customer);
+  // Add your logic to save the customer (e.g., API call)
+};
 const showModal = ref(false);
 const editingCustomer = ref<Customer | null>(null);
 const form = ref({
@@ -156,6 +153,9 @@ const form = ref({
   phone: "",
   address: "",
   notes: "",
+  telephone: "",
+  type: "",
+  province: "",
 });
 
 const customers = computed(() => dataStore.allCustomers);
@@ -173,6 +173,9 @@ onMounted(async () => {
         address: "123 Main St",
         notes: "Regular customer",
         created_at: "2023-01-01T00:00:00Z",
+        telephone: "123-456-7890",
+        type: "Regular",
+        province: "Province A",
       },
       {
         id: 2,
@@ -182,6 +185,9 @@ onMounted(async () => {
         address: "456 Oak Ave",
         notes: "VIP customer",
         created_at: "2023-01-02T00:00:00Z",
+        telephone: "098-765-4321",
+        type: "VIP",
+        province: "Province B",
       },
       {
         id: 3,
@@ -191,6 +197,9 @@ onMounted(async () => {
         address: "789 Pine Rd",
         notes: "New customer",
         created_at: "2023-01-03T00:00:00Z",
+        telephone: "555-123-4567",
+        type: "New",
+        province: "Province C",
       },
     ];
 
@@ -206,6 +215,9 @@ const openAddCustomerModal = () => {
     phone: "",
     address: "",
     notes: "",
+    telephone: "",
+    type: "",
+    province: "",
   };
   showModal.value = true;
 };
@@ -219,6 +231,9 @@ function editCustomer(customer: Customer) {
     phone: customer.phone,
     address: customer.address,
     notes: customer.notes || "",
+    telephone: customer.telephone || "",
+    type: customer.type || "",
+    province: customer.province || "",
   };
   showModal.value = true;
 }
@@ -234,10 +249,11 @@ const saveCustomer = async () => {
         phone: form.value.phone,
         address: form.value.address,
         notes: form.value.notes,
+        telephone: form.value.telephone, // Include this
+        type: form.value.type, // Include this
+        province: form.value.province, // Include this
       };
 
-      // In a real app, you would call your API here
-      // For this example, we'll update the mock data
       const index = dataStore.customers.findIndex(
         (c) => c.id === updatedCustomer.id
       );
@@ -247,17 +263,18 @@ const saveCustomer = async () => {
     } else {
       // Create new customer
       const newCustomer: Customer = {
-        id: Math.max(0, ...dataStore.customers.map((c) => c.id)) + 1,
+        id: Date.now(),
         name: form.value.name,
         email: form.value.email,
         phone: form.value.phone,
         address: form.value.address,
         notes: form.value.notes,
+        telephone: form.value.telephone, // Include this
+        type: form.value.type, // Include this
+        province: form.value.province, // Include this
         created_at: new Date().toISOString(),
       };
 
-      // In a real app, you would call your API here
-      // For this example, we'll add to the mock data
       dataStore.customers.push(newCustomer);
     }
 

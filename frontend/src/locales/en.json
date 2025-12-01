@@ -45,5 +45,17 @@
     "pages.customersPage.title": "Customers",
     "pages.customersPage.addCustomerButton": "Add New Customer",
     "pages.customersPage.mapViewButton": "Customer Map",
-    "pages.customersPage.listViewButton": "Customer List"
+    "pages.customersPage.listViewButton": "Customer List",
+    "pages.customersPage.searchPlaceholder.byName": "Search Customers by Name",
+    "pages.customersPage.searchPlaceholder.byProvince": "Search Customers by Province",
+    "pages.customersPage.confirmButton": "Confirm",
+    "pages.customersPage.addCustomerModal.title": "Add New Customer",
+    "pages.customersPage.addCustomerModal.name": "Customer Name",
+    "pages.customersPage.addCustomerModal.email": "Email Address",
+    "pages.customersPage.addCustomerModal.phone": "Phone Number",
+    "pages.customersPage.addCustomerModal.address": "Address",
+    "pages.customersPage.addCustomerModal.saveButton": "Save",
+    "pages.customersPage.addCustomerModal.updateButton": "Update",
+    "pages.customersPage.addCustomerModal.createButton": "Create",
+    "pages.customersPage.addCustomerModal.cancelButton": "Cancel"
 }

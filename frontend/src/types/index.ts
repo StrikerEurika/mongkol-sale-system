@@ -3,7 +3,7 @@ export interface User {
   id: number;
   name: string;
   email: string;
-  role: 'admin' | 'seller';
+  role: "admin" | "seller";
   phone?: string;
   address?: string;
   bio?: string;
@@ -21,8 +21,11 @@ export interface Item {
 }
 
 export interface Customer {
-  id: number;
+  id: number | null;
   name: string;
+  telephone: string;
+  type: string;
+  province: string;
   email: string;
   phone: string;
   address: string;
@@ -33,7 +36,7 @@ export interface Customer {
 export interface Order {
   id: number;
   customer_id: number;
-  status: 'pending' | 'confirmed' | 'shipped' | 'delivered' | 'cancelled';
+  status: "pending" | "confirmed" | "shipped" | "delivered" | "cancelled";
   total: number;
   created_at: string;
   items: OrderItem[];

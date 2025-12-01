@@ -55,14 +55,14 @@
           v-if="activeView === 'list'"
           v-model="searchQuery"
           type="text"
-          placeholder="Search by name"
+          :placeholder="$t('pages.customersPage.searchPlaceholder.byName')"
           class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
         />
         <input
           v-else
           v-model="provinceFilter"
           type="text"
-          placeholder="Select Province"
+          :placeholder="$t('pages.customersPage.searchPlaceholder.byProvince')"
           class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-green-500 focus:border-green-500 sm:text-sm"
         />
       </div>
@@ -70,12 +70,12 @@
       <!-- Action Buttons -->
       <div class="flex space-x-2">
         <button
-          v-if="activeView === 'map'"
           @click="confirmSelection"
           class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition-colors font-medium"
         >
-          Confirm
+          {{ $t("pages.customersPage.confirmButton") }}
         </button>
+
         <button
           @click="addNewCustomer"
           class="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors font-medium flex items-center"
@@ -94,7 +94,7 @@
               d="M12 6v6m0 0v6m0-6h6m-6 0H6"
             ></path>
           </svg>
-          Add New Customer
+          {{ $t("pages.customersPage.addCustomerButton") }}
         </button>
       </div>
     </div>
@@ -150,6 +150,7 @@ import {
   computed,
   watch,
   nextTick,
+  defineEmits,
 } from "vue";
 import * as echarts from "echarts";
 import { useDebounceFn } from "@vueuse/core";
@@ -164,6 +165,14 @@ interface Customer {
   type: string;
   province: string;
 }
+
+// Define the events emitted by this component
+const emit = defineEmits(["openCustomerModal"]);
+
+// Function to trigger the modal
+const addNewCustomer = () => {
+  emit("openCustomerModal", null);
+};
 
 const columns = [
   { label: "Name", key: "name" },
@@ -438,11 +447,6 @@ const confirmSelection = () => {
   }
 };
 
-// Add new customer handler
-const addNewCustomer = () => {
-  alert("Add new customer functionality would be implemented here.");
-  // Add your add new customer logic here
-};
 
 // Expose methods if needed for parent components
 defineExpose({

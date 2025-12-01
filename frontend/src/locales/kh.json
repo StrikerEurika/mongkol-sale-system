@@ -41,6 +41,18 @@
     "pages.customersPage.title": "អតិថិជន",
     "pages.customersPage.addCustomerButton": "បន្ថែមអតិថិជនថ្មី",
     "pages.customersPage.mapViewButton": "ផែនទីអតិថិជន",
-    "pages.customersPage.listViewButton": "បញ្ជីអតិថិជន"
+    "pages.customersPage.listViewButton": "បញ្ជីអតិថិជន",
+    "pages.customersPage.confirmButton": "បញ្ជាក់",
+    "pages.customersPage.searchPlaceholder.byName": "ស្វែងរកអតិថិជនតាមឈ្មោះ",
+    "pages.customersPage.searchPlaceholder.byProvince": "ស្វែងរកអតិថិជនតាមខេត្ត",
+    "pages.customersPage.addCustomerModal.title": "បន្ថែមអតិថិជនថ្មី",
+    "pages.customersPage.addCustomerModal.name": "ឈ្មោះអតិថិជន",
+    "pages.customersPage.addCustomerModal.email": "អ៊ីមែល",
+    "pages.customersPage.addCustomerModal.phone": "លេខទូរស័ព័រ",
+    "pages.customersPage.addCustomerModal.address": "អាសយដ្ឋាន",
+    "pages.customersPage.addCustomerModal.saveButton": "រក្សាទុក",
+    "pages.customersPage.addCustomerModal.updateButton": "ធ្វើបច្ចុប្បន្នភាព",
+    "pages.customersPage.addCustomerModal.createButton": "បង្កើត",
+    "pages.customersPage.addCustomerModal.cancelButton": "បោះបង់"
 
 }
