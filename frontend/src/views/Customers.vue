@@ -6,54 +6,29 @@
         {{ $t("pages.customersPage.title") }}
       </h1>
 
-      <v-btn
+      <!-- <v-btn
         color="warning"
         @click="openAddCustomerModal"
         :class="$t('fontFamilyClass.body')"
       >
         <FontAwesomeIcon class="mr-1" :icon="['fas', 'plus']" />
         {{ $t("pages.customersPage.addCustomerButton") }}
-      </v-btn>
+      </v-btn> -->
     </div>
 
     <!-- Switch view -->
-    <div class="flex gap-4 mb-6">
-      <v-btn color="warning" :class="$t('fontFamilyClass.body')">
+    <!-- <div class="flex gap-4 mb-6"> -->
+      <!-- <v-btn color="warning" :class="$t('fontFamilyClass.body')">
         <FontAwesomeIcon class="mr-1" :icon="['fas', 'list']" />
         {{ $t("pages.customersPage.listViewButton") }}</v-btn
       >
       <v-btn color="warning" :class="$t('fontFamilyClass.body')">
         <FontAwesomeIcon class="mr-1" :icon="['fas', 'map-marker']" />
         {{ $t("pages.customersPage.mapViewButton") }}
-      </v-btn>
+      </v-btn> -->
 
-      <div class="flex-1"></div>
-    </div>
-
-    <!-- <BaseTable
-      :columns="[
-        { label: '#', key: 'index' },
-        { label: 'Name', key: 'name' },
-        { label: 'Email', key: 'email' },
-        { label: 'Phone', key: 'phone' },
-        { label: 'Address', key: 'address' },
-      ]"
-      :rows="
-        customers.map((customer, index) => ({ ...customer, index: index + 1 }))
-      "
-      :actions="[
-        {
-          label: 'Edit',
-          handler: editCustomer,
-          class: 'text-indigo-600 hover:text-indigo-900',
-        },
-        {
-          label: 'Delete',
-          handler: (row) => deleteCustomer(row.id),
-          class: 'text-red-600 hover:text-red-900',
-        },
-      ]"
-    /> -->
+      <!-- <div class="flex-1"></div>
+    </div> -->
 
     <CustomerListAndMap :customers="customers" />
 
