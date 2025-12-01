@@ -57,5 +57,7 @@
     "pages.customersPage.addCustomerModal.saveButton": "Save",
     "pages.customersPage.addCustomerModal.updateButton": "Update",
     "pages.customersPage.addCustomerModal.createButton": "Create",
-    "pages.customersPage.addCustomerModal.cancelButton": "Cancel"
+    "pages.customersPage.addCustomerModal.cancelButton": "Cancel",
+    "pages.customersPage.addCustomerModal.customerType": "Customer Type",
+    "pages.customersPage.addCustomerModal.customerProvince": "Province"
 }

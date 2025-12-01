@@ -33,6 +33,20 @@ export interface Customer {
   created_at: string;
 }
 
+export interface CustomerPoint {
+  id: string;
+  name: string;
+  province: string;
+  lat: number;
+  lng: number;
+  value: number;    // e.g. spend, orders, or just "1" for count
+}
+
+export interface ProvinceStat {
+  name: string; // province name matching geoJSON
+  value: number; // aggregated customers or metric
+}
+
 export interface Order {
   id: number;
   customer_id: number;

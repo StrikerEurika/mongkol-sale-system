@@ -207,21 +207,6 @@ onMounted(async () => {
   }
 });
 
-const openAddCustomerModal = () => {
-  editingCustomer.value = null;
-  form.value = {
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-    notes: "",
-    telephone: "",
-    type: "",
-    province: "",
-  };
-  showModal.value = true;
-};
-
 // @ts-ignore
 function editCustomer(customer: Customer) {
   editingCustomer.value = customer;
@@ -238,52 +223,6 @@ function editCustomer(customer: Customer) {
   showModal.value = true;
 }
 
-const saveCustomer = async () => {
-  try {
-    if (editingCustomer.value) {
-      // Update existing customer
-      const updatedCustomer = {
-        ...editingCustomer.value,
-        name: form.value.name,
-        email: form.value.email,
-        phone: form.value.phone,
-        address: form.value.address,
-        notes: form.value.notes,
-        telephone: form.value.telephone, // Include this
-        type: form.value.type, // Include this
-        province: form.value.province, // Include this
-      };
-
-      const index = dataStore.customers.findIndex(
-        (c) => c.id === updatedCustomer.id
-      );
-      if (index !== -1) {
-        dataStore.customers[index] = updatedCustomer;
-      }
-    } else {
-      // Create new customer
-      const newCustomer: Customer = {
-        id: Date.now(),
-        name: form.value.name,
-        email: form.value.email,
-        phone: form.value.phone,
-        address: form.value.address,
-        notes: form.value.notes,
-        telephone: form.value.telephone, // Include this
-        type: form.value.type, // Include this
-        province: form.value.province, // Include this
-        created_at: new Date().toISOString(),
-      };
-
-      dataStore.customers.push(newCustomer);
-    }
-
-    closeModal();
-  } catch (error) {
-    console.error("Error saving customer:", error);
-  }
-};
-
 // @ts-ignore
 async function deleteCustomer(id: number) {
   if (confirm("Are you sure you want to delete this customer?")) {
@@ -299,8 +238,4 @@ async function deleteCustomer(id: number) {
   }
 }
 
-const closeModal = () => {
-  showModal.value = false;
-  editingCustomer.value = null;
-};
 </script>

@@ -21,6 +21,9 @@
             class="border p-2 rounded"
             :disabled="loading"
           />
+          <label class="font-medium">
+            {{ $t("pages.customersPage.addCustomerModal.customerType") }}
+          </label>
           <select
             v-model="form.type"
             class="border p-2 rounded"
@@ -34,6 +37,9 @@
               {{ type.title }}
             </option>
           </select>
+          <label class="font-medium">
+            {{ $t("pages.customersPage.addCustomerModal.customerProvince") }}
+          </label>
           <select
             v-model="form.province"
             class="border p-2 rounded"

@@ -1,0 +1,102 @@
+{
+  "type": "FeatureCollection",
+  "name": "cambodia_mock",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "Phnom Penh" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [104.85, 11.60],
+            [104.95, 11.60],
+            [104.95, 11.70],
+            [104.85, 11.70],
+            [104.85, 11.60]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Kandal" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [104.70, 11.40],
+            [105.05, 11.40],
+            [105.05, 11.60],
+            [104.70, 11.60],
+            [104.70, 11.40]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Siem Reap" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [103.70, 13.20],
+            [103.95, 13.20],
+            [103.95, 13.50],
+            [103.70, 13.50],
+            [103.70, 13.20]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Battambang" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [103.00, 12.80],
+            [103.50, 12.80],
+            [103.50, 13.30],
+            [103.00, 13.30],
+            [103.00, 12.80]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Kampong Cham" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [105.00, 12.00],
+            [105.50, 12.00],
+            [105.50, 12.50],
+            [105.00, 12.50],
+            [105.00, 12.00]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Preah Sihanouk" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [103.45, 10.55],
+            [103.85, 10.55],
+            [103.85, 10.90],
+            [103.45, 10.90],
+            [103.45, 10.55]
+          ]
+        ]
+      }
+    }
+  ]
+}

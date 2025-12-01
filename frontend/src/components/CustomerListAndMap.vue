@@ -125,10 +125,49 @@
       </div>
 
       <!-- Map View -->
-      <div v-else class="relative h-[600px] bg-green-50">
-        <div ref="chartContainer" class="w-full h-full"></div>
+      <div v-else class="relative h-[650px] bg-green-50">
+        <div
+          class="absolute top-4 left-4 bg-white p-3 rounded-lg shadow-lg z-10 pointer-events-auto"
+        >
+          <button
+            @click="mapViewType = '2d'"
+            :class="[
+              'px-3 py-2 rounded-md font-medium transition-colors mr-1',
+              mapViewType === '2d'
+                ? 'bg-green-500 text-white'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300',
+            ]"
+          >
+            2D
+          </button>
+          <button
+            @click="mapViewType = '3d'"
+            :class="[
+              'px-3 py-2 rounded-md font-medium transition-colors',
+              mapViewType === '3d'
+                ? 'bg-green-500 text-white'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300',
+            ]"
+          >
+            3D
+          </button>
+          <button
+            @click="resetMap"
+            class="px-3 py-2 rounded-md font-medium transition-colors ml-1 bg-blue-500 text-white hover:bg-blue-600"
+          >
+            Reset Map
+          </button>
+        </div>
 
-        <!-- Province selection overlay (optional) -->
+        <div ref="chartContainer" class="w-full h-full">
+          <!-- ECharts map will render here -->
+          <Cambodia3DMap
+            ref="mapRef"
+            :viewType="mapViewType"
+            class="w-full h-full"
+          />
+        </div>
+
         <div
           v-if="selectedProvince"
           class="absolute top-4 right-4 bg-white p-3 rounded-lg shadow-lg"
@@ -143,19 +182,25 @@
 </template>
 
 <script setup lang="ts">
-import {
-  ref,
-  onMounted,
-  onBeforeUnmount,
-  computed,
-  watch,
-  nextTick,
-  defineEmits,
-} from "vue";
-import * as echarts from "echarts";
+import { ref, computed, watch, defineEmits } from "vue";
+// Ref for Cambodia3DMap to call exposed methods
+const mapRef = ref();
+
+// Method to reset map view via child ref
+const resetMap = () => {
+  if (mapRef.value && typeof mapRef.value.resetMapView === "function") {
+    mapRef.value.resetMapView();
+  }
+};
 import { useDebounceFn } from "@vueuse/core";
 
 import BaseTable from "./BaseTable.vue";
+import Cambodia3DMap from "./Cambodia3DMap.vue";
+
+import type { CustomerPoint, ProvinceStat } from "@/types/index";
+
+// map view state
+const mapViewType = ref<"2d" | "3d">("2d");
 
 // Define types for our data
 interface Customer {
@@ -182,13 +227,12 @@ const columns = [
 ];
 
 // State management
-const activeView = ref<"list" | "map">("list");
+const activeView = ref<"list" | "map">("map");
 const searchQuery = ref("");
 const provinceFilter = ref("");
 const sortBy = ref<"name" | "type" | "province">("name");
 const sortOrder = ref<"asc" | "desc">("asc");
 const selectedProvince = ref<string | null>(null);
-let chartInstance: echarts.ECharts | null = null;
 
 // Sample data - replace with actual API call in production
 const customers = ref<Customer[]>([
@@ -257,6 +301,32 @@ const customers = ref<Customer[]>([
   },
 ]);
 
+// Map point data you'll load this from API
+const customerPoints = ref<CustomerPoint[]>([
+  {
+    id: "1",
+    name: "Customer A",
+    province: "Phnom Penh",
+    lat: 11.5564,
+    lng: 104.9282,
+    value: 10,
+  },
+  {
+    id: "2",
+    name: "Customer B",
+    province: "Siem Reap",
+    lat: 13.3618,
+    lng: 103.859,
+    value: 5,
+  },
+  // ...
+]);
+
+const provinceStats = ref<ProvinceStat[]>([
+  { name: "Phnom Penh", value: 120 },
+  { name: "Siem Reap", value: 80 },
+]);
+
 // Computed properties
 const filteredAndSortedCustomers = computed(() => {
   let filtered = customers.value.filter((customer) => {
@@ -283,141 +353,7 @@ const filteredAndSortedCustomers = computed(() => {
   return filtered;
 });
 
-// ECharts container reference
-const chartContainer = ref<HTMLElement | null>(null);
-
-// Initialize ECharts when component mounts
-onMounted(() => {
-  if (activeView.value === "map") {
-    initializeChart();
-  }
-});
-
-// Clean up ECharts instance when component unmounts
-onBeforeUnmount(() => {
-  if (chartInstance) {
-    chartInstance.dispose();
-    chartInstance = null;
-  }
-});
-
-// Watch for view changes to initialize or dispose of chart
-watch(activeView, (newView) => {
-  if (newView === "map") {
-    nextTick(() => {
-      initializeChart();
-    });
-  } else {
-    if (chartInstance) {
-      chartInstance.dispose();
-      chartInstance = null;
-    }
-  }
-});
-
-// Initialize the ECharts map
-const initializeChart = () => {
-  if (!chartContainer.value) return;
-
-  // Dispose existing instance if any
-  if (chartInstance) {
-    chartInstance.dispose();
-  }
-
-  // Create new instance
-  chartInstance = echarts.init(chartContainer.value);
-
-  // Define Cambodia provinces data (simplified for demo)
-  const cambodiaProvinces = [
-    { name: "Banteay Meanchey", value: 1 },
-    { name: "Oddar Meanchey", value: 1 },
-    { name: "Siemreap", value: 1 },
-    { name: "Pursat", value: 1 },
-    { name: "Koh Kong", value: 1 },
-    { name: "Preah Vihear", value: 1 },
-    { name: "Stung Treng", value: 1 },
-    { name: "Ratanak Kiri", value: 1 },
-    { name: "Mondul Kiri", value: 1 },
-    { name: "Kratié", value: 1 },
-    { name: "Kampong Thom", value: 1 },
-    { name: "Kampong Chhnang", value: 1 },
-    { name: "Kampong Speu", value: 1 },
-    { name: "Kampot", value: 1 },
-    { name: "Kandal", value: 1 },
-    { name: "Phnom Penh", value: 1 },
-    { name: "Prey Veng", value: 1 },
-    { name: "Svay Rieng", value: 1 },
-    { name: "Takeo", value: 1 },
-    { name: "Tboung Khmum", value: 1 },
-    { name: "Kep", value: 1 },
-    { name: "Pailin", value: 1 },
-    { name: "Kampong Cham", value: 1 },
-    { name: "Battambang", value: 1 },
-  ];
-
-  // Configure ECharts options
-  const option = {
-    tooltip: {
-      trigger: "item",
-      formatter: function (params: any) {
-        return `${params.name}<br/>${params.value} customers`;
-      },
-    },
-    visualMap: {
-      min: 0,
-      max: 10,
-      text: ["High", "Low"],
-      realtime: false,
-      calculable: true,
-      inRange: {
-        color: ["#e6f7ff", "#008000"],
-      },
-    },
-    series: [
-      {
-        name: "Cambodia Provinces",
-        type: "map",
-        map: "cambodia",
-        roam: true,
-        zoom: 1.2,
-        label: {
-          show: true,
-          fontSize: 10,
-          color: "#ffffff",
-        },
-        itemStyle: {
-          areaColor: "#4CAF50",
-          borderColor: "#ffffff",
-          borderWidth: 1,
-        },
-        emphasis: {
-          itemStyle: {
-            areaColor: "#8BC34A",
-          },
-        },
-        data: cambodiaProvinces.map((province) => ({
-          name: province.name,
-          value: province.value,
-        })),
-      },
-    ],
-  };
-
-  // Set options and handle resize
-  chartInstance.setOption(option);
-  window.addEventListener("resize", () => {
-    if (chartInstance) {
-      chartInstance.resize();
-    }
-  });
-
-  // Handle click events on map
-  chartInstance.on("click", (params: any) => {
-    if (params.name) {
-      selectedProvince.value = params.name;
-    }
-  });
-};
+// ...existing code...
 
 // Sorting function
 const sortData = (field: "name" | "type" | "province") => {
@@ -446,7 +382,6 @@ const confirmSelection = () => {
     alert("Please select a province first.");
   }
 };
-
 
 // Expose methods if needed for parent components
 defineExpose({

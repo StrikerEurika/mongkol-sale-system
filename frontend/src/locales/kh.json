@@ -53,6 +53,8 @@
     "pages.customersPage.addCustomerModal.saveButton": "រក្សាទុក",
     "pages.customersPage.addCustomerModal.updateButton": "ធ្វើបច្ចុប្បន្នភាព",
     "pages.customersPage.addCustomerModal.createButton": "បង្កើត",
-    "pages.customersPage.addCustomerModal.cancelButton": "បោះបង់"
+    "pages.customersPage.addCustomerModal.cancelButton": "បោះបង់",
+    "pages.customersPage.addCustomerModal.customerType": "ប្រភេទអតិថិជន",
+    "pages.customersPage.addCustomerModal.customerProvince": "ខេត្ត"
 
 }
