@@ -1,19 +1,27 @@
 <!-- src/App.vue -->
 <template>
   <div class="min-h-screen bg-gray-50">
-    <Navbar v-if="showNavbar" @toggle-sidebar="sidebarOpen = !sidebarOpen" />
-    <div class="flex">
-      <Sidebar v-if="showSidebar" :open="sidebarOpen" />
-      <main
-        :class="[
-          'w-full',
-          showSidebar && sidebarOpen ? 'md:ml-64' : '',
-          'transition-all duration-300',
-        ]"
-      >
-        <router-view />
-      </main>
-    </div>
+    <!-- Navbar - Fixed positioning, full width with conditional left offset -->
+    <Navbar
+      v-if="showNavbar"
+      :sidebarOpen="sidebarOpen"
+      @toggle-sidebar="sidebarOpen = !sidebarOpen"
+    />
+
+    <!-- Sidebar - Fixed positioning, full height with z-50 to appear above navbar -->
+    <Sidebar v-if="showSidebar" :open="sidebarOpen" />
+
+    <!-- Main Content - Adjusts when sidebar opens on larger screens -->
+    <main
+      :class="[
+        'min-h-screen',
+        'pt-16', // Account for fixed navbar height
+        showSidebar && sidebarOpen ? 'md:ml-64' : '',
+        'transition-margin duration-300 ease-in-out',
+      ]"
+    >
+      <router-view />
+    </main>
   </div>
 </template>
 
@@ -31,7 +39,7 @@ const showNavbar = computed(() => route.name !== "Login");
 const showSidebar = computed(() => route.name !== "Login");
 const sidebarOpen = ref(showSidebar.value);
 
-// keep sidebarOpen in sync when route changes (e.g., entering/exiting Login)
+// Keep sidebarOpen in sync when route changes (e.g., entering/exiting Login)
 watch(showSidebar, (val) => {
   sidebarOpen.value = val;
 });
@@ -45,7 +53,7 @@ const updateHtmlLangAndClass = (lang: string) => {
   // Remove old lang-xx classes
   html.className = html.className
     .split(" ")
-    .filter(cls => !cls.startsWith("lang-"))
+    .filter((cls) => !cls.startsWith("lang-"))
     .join(" ");
 
   // Add new language class

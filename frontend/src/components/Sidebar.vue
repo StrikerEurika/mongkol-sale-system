@@ -1,12 +1,13 @@
-<!-- src/components/Sidebar.vue -->
 <template>
   <div
     :class="[
-      'fixed inset-y-0 left-0 w-64 bg-[#FEDF92] shadow-lg transform transition-transform duration-300 ease-in-out z-30',
+      'fixed inset-y-0 left-0 w-64 bg-[#FEDF92] shadow-lg transform transition-transform duration-300 ease-in-out z-50',
       open ? 'translate-x-0' : '-translate-x-full',
-      'h-screen overflow-y-auto',
+      'h-screen overflow-y-auto pt-16',
     ]"
-    aria-hidden="false"
+    :aria-hidden="!open"
+    role="navigation"
+    aria-label="Main navigation"
   >
     <!-- Top header with rounded right edge, centered emblem and welcome text -->
     <div class="px-6 pt-6 pb-8">
