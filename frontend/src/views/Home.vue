@@ -1,7 +1,7 @@
 <!-- src/views/Home.vue -->
 <template>
   <div class="p-6">
-    <div class="mb-8">
+    <div class="mb-6">
       <h1 class="text-2xl font-bold text-gray-800">
         {{ $t("pages.homePage.dashboard.title") }}
       </h1>
@@ -18,26 +18,20 @@
     />
 
     <!-- Top 5 Orders Chart -->
-    <div class="bg-white p-6 rounded-lg shadow mb-8">
-      <h2 class="text-xl font-semibold text-gray-800 mb-4">Top 5 Orders</h2>
-      <div class="flex items-end h-64 gap-4">
-        <div
-          v-for="item in dashboardData.topOrders"
-          :key="item.id"
-          class="flex flex-col items-center flex-1"
-        >
-          <div
-            class="w-full bg-orange-500 rounded-t flex items-end justify-center transition-all duration-500"
-            :style="{ height: `${item.quantity * 40}px` }"
-          >
-            <span class="text-white text-xs font-bold mb-1">{{
-              item.quantity
-            }}</span>
-          </div>
-          <div class="mt-2 text-sm text-gray-600">{{ item.name }}</div>
-        </div>
-      </div>
-    </div>
+    <section class="bg-white p-6 rounded-lg shadow mb-8">
+      <ProductionBarsPlot
+        :data="
+          dashboardData.topOrders.map((order) => ({
+            category: order.name,
+            value: order.quantity,
+          }))
+        "
+        title="Top 5 Orders"
+        x-axis-name="Order Categories"
+        y-axis-name="Quantity"
+        color="#f97316"
+      />
+    </section>
 
     <!-- Quick Access Buttons -->
     <div class="bg-white p-6 rounded-lg shadow">
@@ -64,7 +58,9 @@
               />
             </svg>
           </div>
-          <span class="text-sm font-medium">{{ $t("components.sidebar.sidebarNavigation.items") }}</span>
+          <span class="text-sm font-medium">{{
+            $t("components.sidebar.sidebarNavigation.items")
+          }}</span>
         </router-link>
 
         <router-link
@@ -86,7 +82,9 @@
               />
             </svg>
           </div>
-          <span class="text-sm font-medium">{{ $t("components.sidebar.sidebarNavigation.customers") }}</span>
+          <span class="text-sm font-medium">{{
+            $t("components.sidebar.sidebarNavigation.customers")
+          }}</span>
         </router-link>
 
         <router-link
@@ -108,7 +106,9 @@
               />
             </svg>
           </div>
-          <span class="text-sm font-medium">{{ $t("components.sidebar.sidebarNavigation.orders") }}</span>
+          <span class="text-sm font-medium">{{
+            $t("components.sidebar.sidebarNavigation.orders")
+          }}</span>
         </router-link>
 
         <router-link
@@ -166,7 +166,9 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
 import { useAuthStore } from "@/stores/auth";
+
 import DashboardCards from "@/components/DashboardCards.vue";
+import ProductionBarsPlot from "@/components/ProductionBarsPlot.vue";
 
 const authStore = useAuthStore();
 
