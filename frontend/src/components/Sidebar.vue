@@ -10,12 +10,12 @@
     aria-label="Main navigation"
   >
     <!-- Top header with rounded right edge, centered emblem and welcome text -->
-    <div class="px-6 pt-6 pb-8">
+    <div class="px-6 pt-4 pb-6">
       <div
-        class="bg-[#FFF3D6] rounded-tr-3xl rounded-br-3xl p-6 flex flex-col items-center shadow-sm"
+        class="bg-[#FFF3D6] rounded-tr-3xl rounded-br-3xl p-4 flex flex-col items-center shadow-sm"
       >
         <div
-          class="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-md mb-4"
+          class="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-md mb-3"
         >
           <!-- small emblem placeholder (replace with real logo if available) -->
           <img src="/mongkol-logo.svg" alt="Mongkol" class="w-12 h-12" />

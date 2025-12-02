@@ -3,31 +3,34 @@
   <div class="p-6">
     <div class="mb-6">
       <h1 class="text-2xl font-bold text-gray-800">
-        {{ $t("pages.homePage.dashboard.title") }}
+        {{ $t("pages.homePage.pageTitle") }}
       </h1>
       <p class="text-gray-600">
-        {{ $t("pages.homePage.dashboard.welcomeMessage") }} {{ user?.name }}!
+        {{ $t("pages.homePage.welcomeMessage") }} {{ user?.name }}!
       </p>
     </div>
 
     <!-- Dashboard Cards -->
-    <DashboardCards
-      :total-orders="dashboardData.totalOrders"
-      :total-customers="dashboardData.totalCustomers"
-      :total-items="dashboardData.totalItems"
-    />
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <DashboardCards
+        :total-orders="dashboardData.totalOrders"
+        :total-customers="dashboardData.totalCustomers"
+        :total-items="dashboardData.totalItems"
+      />
+    </div>
 
     <!-- Top 5 Orders Chart -->
-    <section class="bg-white p-6 rounded-lg shadow mb-8">
-      <ProductionBarsPlot
+    <section class="bg-white p-2 rounded-lg shadow mb-8">
+      <Top5OrderedProductionBarsPlot
         :data="
           dashboardData.topOrders.map((order) => ({
             category: order.name,
             value: order.quantity,
           }))
         "
-        title="Top 5 Orders"
-        x-axis-name="Order Categories"
+        :title="$t('pages.homePage.top5ProductPlot.plotTitle')"
+        x-axis-name="Order
+      Categories"
         y-axis-name="Quantity"
         color="#f97316"
       />
@@ -168,7 +171,7 @@ import { ref, computed, onMounted } from "vue";
 import { useAuthStore } from "@/stores/auth";
 
 import DashboardCards from "@/components/DashboardCards.vue";
-import ProductionBarsPlot from "@/components/ProductionBarsPlot.vue";
+import Top5OrderedProductionBarsPlot from "@/components/Top5OrderedProductionBarsPlot.vue";
 
 const authStore = useAuthStore();
 

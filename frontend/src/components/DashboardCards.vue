@@ -1,6 +1,5 @@
 <!-- src/components/DashboardCards.vue -->
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
     <div class="bg-white p-6 rounded-lg shadow">
       <div class="flex items-center">
         <div class="p-3 rounded-full bg-orange-100 text-orange-600">
@@ -42,7 +41,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script setup lang="ts">

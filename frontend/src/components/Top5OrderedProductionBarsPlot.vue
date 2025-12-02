@@ -2,12 +2,15 @@
   <!-- Responsive container for the chart -->
   <div
     ref="chartContainerRef"
-    class="w-full h-96 md:h-[400px] lg:h-[500px] bg-white rounded-xl shadow-lg p-4 transition-all duration-300"
+    class="w-full h-200 md:h-[400px] lg:h-[500px] bg-white rounded-xl shadow-lg p-4 transition-all duration-300"
   >
     <!-- Fallback when chart fails to render -->
     <div
       v-if="!chartInstance"
-      :class="['flex items-center,justify-center h-full text-gray-500']"
+      :class="[
+        'flex items-center,justify-center h-full text-gray-500',
+        $t('fontFamilyClass.body'),
+      ]"
     >
       Loading chart...
     </div>
@@ -44,7 +47,6 @@ echarts.use([
 
 // Define props interface with flexible data options
 interface BarChartProps {
-  // Alternative 1: Array of objects with category and value
   data?: Array<{
     category: string;
     value: number;
@@ -68,7 +70,7 @@ const props = withDefaults(defineProps<BarChartProps>(), {
   title: "",
   xAxisName: "",
   yAxisName: "",
-  color: "#4f46e5", // Tailwind indigo-600
+  color: "#4f46e5",
   autoResize: true,
   animation: true,
 });
@@ -80,7 +82,7 @@ const chartInstance: Ref<echarts.ECharts | null> = ref(null);
 
 // Computed property to normalize data format
 const normalizedData = computed(() => {
-  // Use separate arrays if provided (takes precedence)
+  // Use separate arrays if provided
   if (props.categories.length && props.values.length) {
     return {
       categories: props.categories,

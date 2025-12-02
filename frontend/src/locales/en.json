@@ -14,13 +14,12 @@
     "components.sidebar.sidebarNavigation.contacts": "Contacts",
     "components.sidebar.sidebarNavigation.profile": "Profile",
 
-    "pages.homePage.title": "Home Page",
-    "pages.homePage.welcomeMessage": "Welcome back, ",
-    "pages.homePage.dashboard.title": "Dashboard",
-    "pages.homePage.dashboard.welcomeMessage": "Welcome to your dashboard!",
+    "pages.homePage.pageTitle": "Home Page",
+    "pages.homePage.top5ProductPlot.plotTitle": "Top 5 Best Selling Products",
+    "pages.homePage.welcomeMessage": "Welcome to your dashboard!",
     "pages.homePage.quickAccess": "Quick Access",
 
-    "pages.itemsPage.title": "Items",
+    "pages.itemsPage.pageTitle": "Items",
     "pages.itemsPage.addItemButton": "Add New Item",
     "pages.itemsPage.filterByProduct": "Filter by Product",
     "pages.itemsPage.filterBySize": "Filter by Size",

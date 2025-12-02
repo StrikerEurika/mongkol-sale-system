@@ -12,12 +12,13 @@
     "components.sidebar.sidebarNavigation.settings": "ការកំណត់",
     "components.sidebar.sidebarNavigation.contacts": "ទំនាក់ទំនង",
     "components.sidebar.sidebarNavigation.profile": "ប្រវត្តិរូប",
-    "pages.homePage.title": "ទំព័រដើម",
-    "pages.homePage.welcomeMessage": "សូមស្វាគមន៍ត្រឡប់មកវិញ, ",
-    "pages.homePage.dashboard.title": "ផ្ទាំងគ្រប់គ្រង",
-    "pages.homePage.dashboard.welcomeMessage": "សូមស្វាគមន៍មកកាន់ផ្ទាំងគ្រប់គ្រងរបស់អ្នក!",
+
+    "pages.homePage.top5ProductPlot.plotTitle": "ផលិតផលលក់ច្រើនបំផុត ៥ ប្រភេទ",
+    "pages.homePage.pageTitle": "ទំព័រដើម",
+    "pages.homePage.welcomeMessage": "សូមស្វាគមន៍មកកាន់ផ្ទាំងគ្រប់គ្រងរបស់អ្នក!",
     "pages.homePage.quickAccess": "ចូលប្រើរហ័ស",
-    "pages.itemsPage.title": "ទំនិញ",
+
+    "pages.itemsPage.pageTitle": "ទំនិញ",
     "pages.itemsPage.addItemButton": "បន្ថែមទំនិញថ្មី",
     "pages.itemsPage.filterByProduct": "តម្រៀបតាមផលិតផល",
     "pages.itemsPage.filterBySize": "តម្រៀបតាមទំហំ",
@@ -34,6 +35,7 @@
     "pages.itemsPage.addItemModal.price": "តម្លៃ",
     "pages.itemsPage.addItemModal.saveButton": "រក្សាទុក",
     "pages.itemsPage.addItemModal.cancelButton": "បោះបង់",
+
     "pages.authPage.title": "ចូលទៅកាន់ប្រព័ន្ធលក់ មង្គល",
     "pages.authPage.welcome": "សូមស្វាគមន៍មកកាន់ប្រព័ន្ធលក់ មង្គល!",
     "pages.authPage.signInButton": "ចូល",
